@@ -5,7 +5,17 @@
 * RgbQuant.js - an image quantization lib
 */
 
-(function(){
+// UMD module wrapping pattern taken from http://addyosmani.com/writing-modular-js/
+(function (root, factory) {
+  "use strict";
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.curtain = factory();
+  }
+}(this, function () {
 	function RgbQuant(opts) {
 		opts = opts || {};
 
@@ -925,11 +935,6 @@
 	}
 
 	// expose
-	this.RgbQuant = RgbQuant;
+	return RgbQuant;
 
-	// expose to commonJS
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = RgbQuant;
-	}
-
-}).call(this);
+}));
